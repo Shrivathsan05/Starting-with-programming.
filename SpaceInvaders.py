@@ -1,6 +1,9 @@
 import math
 import random
 import pygame
+pygame.mixer.init()
+Music = pygame.mixer.music.load("BattleTime.mp3")
+pygame.mixer.music.play(-1)
 ScreenWidth = 800
 ScreenHeight = 500
 PlayerStartX = 370
@@ -14,6 +17,7 @@ CollisionDistance = 27
 pygame.init()
 Screen = pygame.display.set_mode((ScreenWidth, ScreenHeight))
 Background = pygame.image.load("Space.jpeg")
+BackgroundScale = pygame.transform.scale(Background, (ScreenWidth, ScreenHeight))
 pygame.display.set_caption("Space Invaders")
 Icon = pygame.image.load("UFO-removebg-preview.png")
 pygame.display.set_icon(Icon)
@@ -50,6 +54,9 @@ def ShowScore(x, y):
 def ShowTheGameOverText():
     TheGameOverText = GameOverTextFont.render(" GAME OVER ", True, (255, 255, 255))
     Screen.blit(TheGameOverText, (200, 250))
+def ShowTheYouWonText():
+    TheYouWonText = GameOverTextFont.render(" YOU WON! ", True, (255, 255, 255))
+    Screen.blit(TheYouWonText, (200, 250))
 def DrawThePlayer(x, y):
     Screen.blit(PlayerImage, (x, y))
 def DrawTheEnemy(x, y, s):
@@ -64,7 +71,7 @@ def CheckForCollision(EnemyX, EnemyY, BulletX, BulletY):
 Running = True
 while Running:
     Screen.fill((0, 0, 0))
-    Screen.blit(Background, (0, 0))
+    Screen.blit(BackgroundScale, (0, 0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             Running = False
@@ -85,6 +92,9 @@ while Running:
             for k in range(NumberofEnemies):
                 EnemyY[k] = 2000
             ShowTheGameOverText()
+            break
+        if ScoreValue >= 10:
+            ShowTheYouWonText()
             break
         EnemyX[s] += EnemyXChange[s]
         if EnemyX[s] <= 0 or EnemyX[s] >= ScreenWidth - 64:
