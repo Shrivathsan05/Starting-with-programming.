@@ -1,0 +1,30 @@
+#Create a user registration form with Tkinter! Students will learn to build a login interface with text input fields, password masking, button functionality, and message display. Perfect for understanding form creation and user interaction in GUI applications.
+from tkinter import *
+Root = Tk()
+Root.title("Login App")
+Root.geometry("400x400")
+TheFrame = Frame(master=Root, height=200, width=360, bg = "#d0efff")
+Label1 = Label(TheFrame, text=" Full Name : ", bg = "#3895D3", fg = "white", width=12)
+Label2 = Label(TheFrame, text=" Email ID : ", bg = "#3895D3", fg = "white", width=12)
+Label3 = Label(TheFrame, text=" Enter Password : ", bg = "#3895D3", fg = "white", width=12)
+NameEntry = Entry(TheFrame)
+EmailEntry = Entry(TheFrame)
+PasswordEntry = Entry(TheFrame, show="*")
+def DisplayMessage():
+    Name = NameEntry.get()
+    Greeting = "Hello, "+Name+"!"
+    Message = "\n Congratulations for your new account! "
+    TextBox.insert(END, Greeting)
+    TextBox.insert(END, Message)
+TextBox = Text(bg = "#BEBEBE", fg = "black")
+TheButton = Button(text = " Create Account ", command=DisplayMessage, bg = "Dark Red")
+TheFrame.place(x = 20, y = 20)
+Label1.place(x = 20, y = 20)
+NameEntry.place(x = 150, y = 20)
+Label2.place(x = 20, y = 80)
+EmailEntry.place(x = 150, y = 80)
+Label3.place(x = 20, y = 140)
+PasswordEntry.place(x = 150, y = 140)
+TheButton.place(x = 130, y = 210)
+TextBox.place(y = 250)
+Root.mainloop()
